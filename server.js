@@ -31,7 +31,8 @@ require('mongoose').connect('mongodb://localhost/nytimes_db', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: true
-    .then(_ => app.listen(3000))
-    .catch(e => console.log(e))
 })
+  .then(_ => app.listen(3000))
+  .catch(e => console.log(e))
+
 // app.listen(3000)
