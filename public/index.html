@@ -19,12 +19,24 @@
     const scrapeArticles = _ => {
       console.log('Scrape Articles Working')
       fetch('/scrape')
-        .then(r => r.json('articles'))
-        
+        .then(res => res.text())
+        .then((articleArr) => {
+          console.log('Success')
+        })
+        // .then(response => console.log('Success:', ('articles')))
+        // .catch(err => console.log(err))
     }
 
     const getArticles = _ => {
       console.log('Get Articles Working')
+      fetch('/articles')
+        .then(res => res.text())
+        .then((articleArr) => {
+          for (i =0; i < 10; i++) {
+            document.querySelector('#getArticles')
+          }
+        })
+
     }
   </script>
 </body>

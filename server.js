@@ -14,15 +14,11 @@ app.get('/scrape', (req, res) => {
   axios.get('https://www.nytimes.com')
     .then(({ data }) => {
       const $ = require('cheerio').load(data)
-      const articleArr = []
-      $('.css-6p6lnl').each((i, elem) => {
-        articleArr.push({
-          title: $(elem).children('a').text(),
-          link: `https://www.nytimes.com${$(elem).children('a').attr('href')}`
-        })
-        console.log(`-------------------`)
-        db.articles.insert(articleArr, e => e ? console.log(e) : res.sendStatus(200))
-      })
+      $('.css-6p6lnl').each((i, elem) => db.articles.insert({
+        title: $(elem).children('a').text(),
+        link: `https://www.nytimes.com${$(elem).children('a').attr('href')}`
+      }, (e, data) => console.log('data created: ', data)))
+      return res.sendStatus(201)
     })
     .catch(e => console.log(e))
 })
